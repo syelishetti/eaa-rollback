@@ -1,0 +1,13 @@
+# Playbook is to Rollback the current working build to the previous version
+# This playbook will run for the role mentioned and create the symlink to the previous config
+
+- name: Rollback DPOP
+  hosts: "{{group}}"
+  become_user: root
+  become: true
+  become_method: sudo
+  user: "{{user}}"
+
+  roles:
+          - "{{role}}"
+

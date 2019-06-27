@@ -1,0 +1,6 @@
+- name: Nginx config changes
+  block:
+          - include_tasks: reload_nginx.yml
+            when: (role == "cloud_proxy")
+
+

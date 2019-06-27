@@ -1,0 +1,5 @@
+- name: Restart Nginx
+  become: yes
+  command: /opt/wapp/nginx/sbin/nginx -t
+  command: /opt/wapp/nginx/sbin/nginx -u
+  
