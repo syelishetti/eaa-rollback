@@ -16,7 +16,7 @@ previous_version=`$psql_connect -t -A -c  "select previous_version from dpop_rel
 
 rollback_path=/opt/wapp/eaa/rollback/
 local_ansible_path=/opt/wapp/rollback/ansible/
-ansible_path=/opt/wapp/eaa/rollback/ansible/
+ansible_path=/opt/wapp/eaa/rollback/ansible
 inventory_path=$ansible_path/inventory
 
 echo > $rollback_log
@@ -35,7 +35,7 @@ rsync -e 'ssh -p 3333' -arvz --progress --delete $local_ansible_path ubuntu@$dpo
 
 echo -e "\n\n###########################"
 echo "Running the playbook from Bastion to all the $proxy nodes in $dpop"
-ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version\" -vv $ansible_path/main.yml
+ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true\" -vv $ansible_path/main.yml
 
 #echo "ssh $dpop_bastion ansible-playbook -i $dpop -e \"group=$proxy user=cfgdamin nginx_version=$nginx_version\" main.yml"
 #ssh ubuntu@${dpop_bastion} "ansible-playbook -i /tmp/$dpop -e \"group=$proxy user=ubuntu nginx_version=xyz\" /opt/scripts/main.yml"

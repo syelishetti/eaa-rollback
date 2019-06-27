@@ -1,8 +1,1 @@
 
-service_dir: "/opt/wapp"
-master_dir: "nginx"
-currert_version: "{{current_version}}"
-previous_version: "{{previous_version}}"
-#old_nginx_build: "nginx.4.1.0-681"
-#new_nginx_build: "nginx.4.1.0-691"
-

@@ -7,6 +7,8 @@
   become: true
   become_method: sudo
   user: "{{user}}"
+  vars_files:
+          - vars/system_vars.yml 
 
   roles:
           - "{{role}}"
