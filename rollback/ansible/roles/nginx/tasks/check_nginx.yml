@@ -1,0 +1,17 @@
+- stat:
+        path: "{{service_dir}}/{{master_dir}}"
+  register: sym
+
+- name: Check if the directory match
+  set_fact:
+        installed_version: '{{sym.stat.lnk_source | basename| replace("/opt/wapp/", "")}}'
+        latest_version: '{{current_version}}'
+        rollback_version: '{{previous_version}}'
+
+- block:
+        - name: "Exit playbook if no rollback version available."
+          debug: 
+            msg: "Don't have a previous rollback version available"
+            
+        - meta: end_play
+          when: installed_version == rollback_version

@@ -1,0 +1,7 @@
+service_dir: "/opt/wapp"
+master_dir: "nginx"
+
+#Dynamic Variables
+currert_version: "{{current_version}}"
+previous_version: "{{previous_version}}"
+
