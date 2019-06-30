@@ -2,20 +2,19 @@
   become: yes
   command: "{{item}}"
   with_items:
-          - cd {{app_dir}} && sudo chown -R cfgadmin:cfgadmin {{app_dir}}/{{app}}
-          - cp -f  {{app_dir}}/{{app}}/conf/nginx.conf /tmp/nginx.conf
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/applications {{app_dir}}/{{app}}/conf/.
-          #- cp -rf  {{app_dir}}/{{app}}.backup/conf/directories {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/certs {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/rules {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/infra {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/partner {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/modsecurity {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/apps {{app_dir}}/{{app}}/conf/idp/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/customization {{app_dir}}/{{app}}/conf/idp/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/kerberos {{app_dir}}/{{app}}/conf/idp/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/saml {{app_dir}}/{{app}}/conf/idp/.
-          - cp -f  {{app_dir}}/{{app}}.backup/conf/dialin_exception_peers.conf {{app_dir}}/{{app}}/conf/
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/dialin-applications {{app_dir}}/{{app}}/conf/.
-          - cp -rf  {{app_dir}}/{{app}}.backup/conf/ocsps {{app_dir}}/{{app}}/conf/.
+          - cd {{service_dir}} && sudo chown -R cfgadmin:cfgadmin {{service_dir}}/{{master_dir}}
+          - cp -f  {{service_dir}}/{{master_dir}}/conf/nginx.conf /tmp/nginx.conf
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/master_dirlications {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/certs {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/rules {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/infra {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/partner {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/modsecurity {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/master_dirs {{service_dir}}/{{master_dir}}/conf/idp/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/customization {{service_dir}}/{{master_dir}}/conf/idp/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/kerberos {{service_dir}}/{{master_dir}}/conf/idp/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/saml {{service_dir}}/{{master_dir}}/conf/idp/.
+          - cp -f  {{service_dir}}/{{previous_version}}/conf/dialin_exception_peers.conf {{service_dir}}/{{master_dir}}/conf/
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/dialin-master_dirlications {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{previous_version}}/conf/ocsps {{service_dir}}/{{master_dir}}/conf/.
 
