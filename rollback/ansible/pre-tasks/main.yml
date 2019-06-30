@@ -1,0 +1,2 @@
+- include_tasks: common_tasks/main.yml
+- include_tasks: pre_check.yml

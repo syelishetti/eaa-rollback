@@ -1,0 +1,18 @@
+- stat:
+        path: "{{service_dir}}/{{master_dir}}"
+  register: installednginx
+
+- stat:
+        path: "{{service_dir}}/{{master_dir}}.backup"
+  register: backupnginx
+
+- stat:
+        path: "{{service_dir}}/{{previous_version}}"
+  register: previouspath
+
+- name: Get nginx version details
+  set_fact:
+        installed_version: '{{installednginx.stat.lnk_source | basename| replace("/opt/wapp/", "")}}'
+        backup_version: '{{backupnginx.stat.lnk_source | basename| replace("/opt/wapp/", "")}}'
+        latest_version: '{{current_version}}'
+        rollback_version: '{{previous_version}}'

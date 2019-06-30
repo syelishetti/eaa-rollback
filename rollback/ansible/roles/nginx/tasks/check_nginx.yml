@@ -2,6 +2,10 @@
         path: "{{service_dir}}/{{master_dir}}"
   register: sym
 
+- stat:
+        path: "{{service_dir}}/{{previous_version}}"
+  register: oldnginx
+
 - name: Check if the directory match
   set_fact:
         installed_version: '{{sym.stat.lnk_source | basename| replace("/opt/wapp/", "")}}'
@@ -14,4 +18,4 @@
             msg: "Don't have a previous rollback version available"
             
         - meta: end_play
-          when: installed_version == rollback_version
+          when: (oldnginx.stat.exists and oldnginx.stat.isdir) or (installed_version == rollback_version)

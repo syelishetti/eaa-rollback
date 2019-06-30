@@ -1,8 +1,7 @@
 - name: Nginx config changes
   block:
-          - include_tasks: check_nginx.yml
-          - include_tasks: reload_nginx.yml
           - include_tasks: create_symlink.yml
-            when: (role == "cloud_proxy") and (rollback == "true")
+          - include_tasks: reload_nginx.yml
+  when: (role == "cloud_proxy") and (rollback == "true")
 
 

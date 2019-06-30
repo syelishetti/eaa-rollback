@@ -1,0 +1,21 @@
+- name: Nginx config test
+  become: yes
+  command: "{{item}}"
+  with_items:
+          - cd {{app_dir}} && sudo chown -R cfgadmin:cfgadmin {{app_dir}}/{{app}}
+          - cp -f  {{app_dir}}/{{app}}/conf/nginx.conf /tmp/nginx.conf
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/applications {{app_dir}}/{{app}}/conf/.
+          #- cp -rf  {{app_dir}}/{{app}}.backup/conf/directories {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/certs {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/rules {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/infra {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/partner {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/modsecurity {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/apps {{app_dir}}/{{app}}/conf/idp/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/customization {{app_dir}}/{{app}}/conf/idp/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/kerberos {{app_dir}}/{{app}}/conf/idp/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/idp/saml {{app_dir}}/{{app}}/conf/idp/.
+          - cp -f  {{app_dir}}/{{app}}.backup/conf/dialin_exception_peers.conf {{app_dir}}/{{app}}/conf/
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/dialin-applications {{app_dir}}/{{app}}/conf/.
+          - cp -rf  {{app_dir}}/{{app}}.backup/conf/ocsps {{app_dir}}/{{app}}/conf/.
+

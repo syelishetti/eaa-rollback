@@ -1,0 +1,23 @@
+- block:
+        - name: "Check if rollback build is available"
+          debug:
+                  msg: "Exit if rollback build is unavailable. Else continue further"
+
+        - meta: end_play
+          when: previouspath.stat.exists == false   
+
+#- block:
+#        - name: "Check if rollback build exists in the machine."
+#          debug:
+#                  msg: "Exit if backup version is not same as the rollback version. Else continue further"
+#
+#        - meta: end_play
+#          when: backup_version != rollback_version 
+
+- block:
+        - name: "Check if already running rollback version"
+          debug:
+            msg: "Exit if current version is same as the rollback version. Else continue further"
+
+        - meta: end_play
+          when: (installed_version == rollback_version)

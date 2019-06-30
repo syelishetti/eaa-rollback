@@ -1,5 +1,11 @@
-- name: Restart Nginx
+- name: Nginx config test
   become: yes
-  command: /opt/wapp/nginx/sbin/nginx -t
-  command: /opt/wapp/nginx/sbin/nginx -u
+  command: "{{item}}"
+  with_items:
+          - /opt/wapp/nginx/sbin/nginx -t
+          - /opt/wapp/nginx/sbin/nginx -u
+  
+            #- name: Nginx config test
+            #become: yes
+            #command: /opt/wapp/nginx/sbin/nginx -u
   
