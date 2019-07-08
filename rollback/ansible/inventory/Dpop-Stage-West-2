@@ -1,0 +1,7 @@
+[cloud_proxy]
+10.20.8.11 tag_name="Dpop-West-2-U18-stage-CloudProxy-1"
+10.20.8.12 tag_name="Dpop-West-2-U18-stage-CloudProxy-2"
+10.20.8.104 tag_name="Dpop-West-2-U18-stage-CloudProxy-3"
+
+[login_proxy]
+10.20.8.21 tag_name="Dpop-West-2-U18-stage-LoginServer-1"

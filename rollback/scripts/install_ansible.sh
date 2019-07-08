@@ -12,8 +12,8 @@ echo > $ansible_install_log
 exec > >(tee -a $ansible_install_log) 2>&1
 
 function install_ansible {
-#is_installed_status=`ssh $ip -p $dpop_bastion_port ansible --version; echo $?` > /dev/null
-is_installed_status=`ssh $ip -p $dpop_bastion_port sudo dpkg -l |grep ansible |awk '{print $1}'` > /dev/null
+is_installed_status=`ssh $ip -p $dpop_bastion_port ansible --version; echo $?` > /dev/null
+#is_installed_status=`ssh $ip -p $dpop_bastion_port sudo dpkg -l |grep ansible |awk '{print $1}'` > /dev/null
 if [ $is_installed_status != 'ii' ]
 then
     echo "Installing Ansible dependencies"

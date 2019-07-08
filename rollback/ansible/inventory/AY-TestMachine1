@@ -1,6 +1,0 @@
-[cloud_proxy]
-127.0.0.1 tag_name="AY-TestMachine1-CloudProxy1"
-
-[login_proxy]
-127.0.0.1 tag_name="AY-TestMachine1-LoginProxy1"
-
