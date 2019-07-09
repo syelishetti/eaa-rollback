@@ -1,5 +1,9 @@
 - name: create a symlink
+<<<<<<< HEAD
   #become: true
+=======
+  #become: yes
+>>>>>>> master
   #become_user: cfgadmin
   file:
            src: "{{rollback_version}}"

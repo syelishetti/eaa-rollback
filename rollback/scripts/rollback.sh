@@ -36,9 +36,17 @@ rsync -e 'ssh -p 3333' -arvz --progress --delete $local_ansible_path ubuntu@$dpo
 echo -e "\n\n###########################"
 if [ $check = 'Yes' ]
 then
+<<<<<<< HEAD
 	echo "Running the playbook in Check Mode from Bastion of $dpop to all the $proxy nodes"
 	ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml --check
 else
 	echo "Running the playbook from Bastion of $dpop to all the $proxy nodes"
 	ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml
+=======
+        echo "Running the playbook in Check Mode from Bastion of $dpop to all the $proxy nodes"
+        ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml --check
+else
+        echo "Running the playbook from Bastion of $dpop to all the $proxy nodes"
+        ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml
+>>>>>>> master
 fi
