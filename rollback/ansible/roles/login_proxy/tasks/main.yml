@@ -1,3 +1,3 @@
 - name: Include the role  nginx
-  block: 
+  block:
         - include_role: name=nginx

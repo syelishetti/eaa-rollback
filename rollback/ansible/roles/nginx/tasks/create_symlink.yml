@@ -1,6 +1,6 @@
 - name: create a symlink
-  become: yes
-  become_user: cfgadmin
+  #become: yes
+  #become_user: cfgadmin
   file:
            src: "{{rollback_version}}"
            dest: "{{service_dir}}/{{master_dir}}"

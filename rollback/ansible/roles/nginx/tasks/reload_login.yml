@@ -1,0 +1,13 @@
+- name: Nginx config test
+  become: yes
+  command: "{{item}}"
+  with_items:
+          - /opt/wapp/nginx/sbin/nginx -t
+          - /opt/wapp/nginx/sbin/nginx -u
+          - supervisorctl restart europa
+          - supervisorctl restart idp
+  
+            #- name: Nginx config test
+            #become: yes
+            #command: /opt/wapp/nginx/sbin/nginx -u
+  
