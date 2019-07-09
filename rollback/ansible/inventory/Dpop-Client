@@ -1,0 +1,5 @@
+[cloud_proxy]
+10.56.8.11 tag_name="DPOP-CLIENT-CloudProxy-1"	
+
+[login_proxy]
+10.56.8.21 tag_name="DPOP-CLIENT-LoginServer-1"

@@ -4,7 +4,6 @@
 - name: Rollback DPOP
   serial: 1
   hosts: "{{group}}"
-  become_user: root
   become: true
   become_method: sudo
   user: "{{user}}"

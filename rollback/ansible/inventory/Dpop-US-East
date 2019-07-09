@@ -1,0 +1,7 @@
+[cloud_proxy]
+10.6.8.101 tag_name="DPOP-East-ProxyServer-1"
+10.6.8.102 tag_name="DPOP-East-ProxyServer-2"
+
+[login_proxy]
+10.6.8.201 tag_name="DPOP-East-New-LoginServer-1"
+10.6.8.202 tag_name="DPOP-East-New-LoginServer-2"

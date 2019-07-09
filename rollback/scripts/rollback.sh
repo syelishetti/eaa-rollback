@@ -2,6 +2,7 @@
 dpop=$1
 proxy=$2
 release=$3
+check=$4
 
 datetime=`date +"%m%d%y%H%M"`
 rollback_log=/var/log/wapp/rollback/rollback_log-$dpop-${datetime}.log
@@ -12,7 +13,6 @@ dpop_bastion_ip=`$psql_connect -t -A -c  "select bastion_ip from dpop_info where
 dpop_bastion_port=`$psql_connect -t -A -c  "select port_no from dpop_info where dpop_name='$dpop'"`
 current_version=`$psql_connect -t -A -c  "select current_version from dpop_release_info where release_name='$release' and trash=false"`
 previous_version=`$psql_connect -t -A -c  "select previous_version from dpop_release_info where release_name='$release' and trash=false"`
-#nginx_version=`$psql_connect -t -A -c  "select nginx_version from dpop_nginx_version where rollback_version= 't'"`
 
 rollback_path=/opt/wapp/eaa/rollback/
 local_ansible_path=/opt/wapp/rollback/ansible/
@@ -34,8 +34,11 @@ echo "Copying the local ansible path to the remote Bastion Machine"
 rsync -e 'ssh -p 3333' -arvz --progress --delete $local_ansible_path ubuntu@$dpop_bastion_ip:$ansible_path -v
 
 echo -e "\n\n###########################"
-echo "Running the playbook from Bastion to all the $proxy nodes in $dpop"
-ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml
-
-#ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml --check
-
+if [ $check = 'Yes' ]
+then
+	echo "Running the playbook in Check Mode from Bastion of $dpop to all the $proxy nodes"
+	ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml --check
+else
+	echo "Running the playbook from Bastion of $dpop to all the $proxy nodes"
+	ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml
+fi

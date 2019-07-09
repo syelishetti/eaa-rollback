@@ -6,7 +6,7 @@ export PGPASSWORD=dbpassword
 export psql_connect="psql -U dbuser -h localhost -d eaa_upgrade"
 
 dpop_bastion_ip=(`$psql_connect -t -A -c "select bastion_ip from dpop_info"`)
-dpop_bastion_port=3333
+#dpop_bastion_port=3333
 
 echo > $ansible_install_log
 exec > >(tee -a $ansible_install_log) 2>&1
@@ -27,6 +27,7 @@ echo "Checking & Installing Ansible on all Bastion Nodes"
 
 for ip in ${dpop_bastion_ip[@]};
 do
+    dpop_bastion_port=(`$psql_connect -t -A -c "select port_no from dpop_info where bastion_ip='$ip'"`)
     echo -e "\n################"
     echo "Working on the bastion ip: $ip"
     install_ansible

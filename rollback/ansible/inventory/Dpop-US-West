@@ -1,0 +1,7 @@
+[cloud_proxy]
+10.11.13.101 tag_name="DPOP-WEST-PROXYSERVER-1"
+10.11.13.102 tag_name="DPOP-WEST-PROXYSERVER-2"
+
+[login_proxy]
+10.11.13.201 tag_name="DPOP-WEST-LOGINSERVER-1"
+10.11.13.202 tag_name="DPOP-WEST-LOGINSERVER-2"
