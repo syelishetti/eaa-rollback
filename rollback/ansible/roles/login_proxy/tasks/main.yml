@@ -1,8 +1,3 @@
-<<<<<<< HEAD
-- name: reloading nginx
-  block: 
-=======
 - name: Include the role  nginx
   block:
->>>>>>> master
         - include_role: name=nginx
