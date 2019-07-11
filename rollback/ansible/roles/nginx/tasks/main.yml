@@ -1,12 +1,6 @@
 - name: Rollback configuration for Cloud Proxy
   block:
+          - include_tasks: copy_config.yml
           - include_tasks: create_symlink.yml
           - include_tasks: reload_nginx.yml
-  when: (role == "cloud_proxy") and (rollback == "true")
-
-- name: Rollback configuration for Login Proxy
-  block:
-          - include_tasks: create_symlink.yml
-          - include_tasks: reload_login.yml
-  when: (role == "login_proxy") and (rollback == "true")
 

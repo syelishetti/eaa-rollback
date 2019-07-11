@@ -1,11 +1,18 @@
-- name: Nginx config test
+- name: Reload nginx
   become: yes
   command: "{{item}}"
   with_items:
           - /opt/wapp/nginx/sbin/nginx -t
           - /opt/wapp/nginx/sbin/nginx -u
-  
-            #- name: Nginx config test
-            #become: yes
-            #command: /opt/wapp/nginx/sbin/nginx -u
+  when: (role == "cloud_proxy" or role == "login_proxy") and (rollback == "true")
+
+- name: Reload nginx on login server
+  become: yes
+  command: "{{item}}"
+  with_items:
+         - supervisorctl restart europa
+         - supervisorctl restart idp   
+  when: (role == "login_proxy") and (rollback == "true")
+            
+ 
   

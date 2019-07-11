@@ -1,20 +1,26 @@
-- name: Nginx config test
+- name: Copy nginx config during the rollback
   become: yes
   command: "{{item}}"
   with_items:
-          - cd {{service_dir}} && sudo chown -R cfgadmin:cfgadmin {{service_dir}}/{{master_dir}}
-          - cp -f  {{service_dir}}/{{master_dir}}/conf/nginx.conf /tmp/nginx.conf
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/master_dirlications {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/certs {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/rules {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/infra {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/partner {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/modsecurity {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/master_dirs {{service_dir}}/{{master_dir}}/conf/idp/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/customization {{service_dir}}/{{master_dir}}/conf/idp/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/kerberos {{service_dir}}/{{master_dir}}/conf/idp/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/idp/saml {{service_dir}}/{{master_dir}}/conf/idp/.
-          - cp -f  {{service_dir}}/{{previous_version}}/conf/dialin_exception_peers.conf {{service_dir}}/{{master_dir}}/conf/
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/dialin-master_dirlications {{service_dir}}/{{master_dir}}/conf/.
-          - cp -rf  {{service_dir}}/{{previous_version}}/conf/ocsps {{service_dir}}/{{master_dir}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/applications {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/certs {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/rules {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/infra {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/partner {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/modsecurity {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/idp/apps {{service_dir}}/{{previous_version}}/conf/idp/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/idp/customization {{service_dir}}/{{previous_version}}/conf/idp/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/idp/kerberos {{service_dir}}/{{previous_version}}/conf/idp/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/idp/saml {{service_dir}}/{{previous_version}}/conf/idp/.
+          - cp -f  {{service_dir}}/{{master_dir}}/conf/dialin_exception_peers.conf {{service_dir}}/{{previous_version}}/conf/
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/dialin-applications {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/ocsps {{service_dir}}/{{previous_version}}/conf/.
+  when: (role == "cloud_proxy") and (rollback == "true") and (copy_config == "Yes")
 
+- name: Copy nginx config for login proxy during the rollback
+  become: yes
+  command: "{{item}}"
+  with_items:
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/directories {{service_dir}}/{{previous_version}}/conf/.
+          - cp -rf  {{service_dir}}/{{master_dir}}/conf/idp/oidc {{service_dir}}/{{previous_version}}/conf/idp/.
+  when: (role == "login_proxy") and (rollback == "true") and (copy_config == "Yes")
