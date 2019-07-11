@@ -20,4 +20,4 @@
             msg: "Exit if current version is same as the rollback version. Else continue further"
 
         - meta: end_play
-          when: (installed_version == rollback_version)
+          when: (installed_version == previous_version)

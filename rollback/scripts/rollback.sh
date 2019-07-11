@@ -2,7 +2,8 @@
 dpop=$1
 proxy=$2
 release=$3
-check=$4
+copy_config=$4
+check=$5
 
 datetime=`date +"%m%d%y%H%M"`
 rollback_log=/var/log/wapp/rollback/rollback_log-$dpop-${datetime}.log
@@ -38,8 +39,8 @@ echo -e "\n\n###########################"
 if [ $check = 'Yes' ]
 then
         echo "Running the playbook in Check Mode from Bastion of $dpop to all the $proxy nodes"
-        ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml --check
+        ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=$copy_config\" -vv $ansible_path/main.yml --check
 else
         echo "Running the playbook from Bastion of $dpop to all the $proxy nodes"
-        ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=false\" -vv $ansible_path/main.yml
+        ssh ${dpop_bastion_ip} -p ${dpop_bastion_port} ansible-playbook -i $inventory_path/$dpop -e \"role=$proxy group=$proxy user=ubuntu current_version=$current_version previous_version=$previous_version rollback=true copy_config=$copy_config\" -vv $ansible_path/main.yml
 fi

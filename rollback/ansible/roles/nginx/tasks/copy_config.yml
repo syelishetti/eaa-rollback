@@ -15,7 +15,7 @@
           - cp -f  {{service_dir}}/{{master_dir}}/conf/dialin_exception_peers.conf {{service_dir}}/{{previous_version}}/conf/
           - cp -rf  {{service_dir}}/{{master_dir}}/conf/dialin-applications {{service_dir}}/{{previous_version}}/conf/.
           - cp -rf  {{service_dir}}/{{master_dir}}/conf/ocsps {{service_dir}}/{{previous_version}}/conf/.
-  when: (role == "cloud_proxy") and (rollback == "true") and (copy_config == "Yes")
+  when: (role == "cloud_proxy" or role == "login_proxy") and (rollback == "true") and (copy_config == "Yes")
 
 - name: Copy nginx config for login proxy during the rollback
   become: yes

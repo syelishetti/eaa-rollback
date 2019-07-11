@@ -14,5 +14,5 @@
   set_fact:
         installed_version: '{{installednginx.stat.lnk_source | basename| replace("/opt/wapp/", "")}}'
         backup_version: '{{backupnginx.stat.lnk_source | basename| replace("/opt/wapp/", "")}}'
-        latest_version: '{{current_version}}'
-        rollback_version: '{{previous_version}}'
+        current_version: '{{current_version}}'
+        previous_version: '{{previous_version}}'
