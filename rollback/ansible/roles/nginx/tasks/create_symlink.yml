@@ -1,7 +1,7 @@
 - name: create a symlink
-  #become: yes
-  #become_user: cfgadmin
   file:
-           src: "{{rollback_version}}"
+           src: "{{previous_version}}"
            dest: "{{service_dir}}/{{master_dir}}"
+           owner: cfgadmin
+           group: cfgadmin
            state: link
