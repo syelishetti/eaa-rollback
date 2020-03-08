@@ -1,6 +1,0 @@
-[cloud_proxy]
-10.99.8.12 tag_name="dpop-fedramp-CloudProxy-2"
-10.99.8.11 tag_name="dpop-fedramp-CloudProxy-1"
-
-[login_proxy]
-10.99.8.21 tag_name="dpop-fedramp-LoginServer-1"

@@ -1,0 +1,10 @@
+[cloud_proxy]
+10.191.8.11 tag_name="DPOP-DPE-CloudProxy-1"
+10.191.8.12 tag_name="DPOP-DPE-CloudProxy-2"
+10.191.8.13 tag_name="DPOP-DPE-CloudProxy-3"
+10.191.8.14 tag_name="DPOP-DPE-CloudProxy-4"
+
+[login_proxy]
+10.191.8.21 tag_name="DPOP-DPE-LoginServer-1"
+10.191.8.22 tag_name="DPOP-DPE-LoginServer-2"
+
